@@ -1,10 +1,9 @@
 package com.rioverde.tech.docsite.docsite.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.rioverde.tech.docsite.docsite.domain.Document;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface DocumentRepository extends CrudRepository<Document, Long>{
+public interface DocumentRepository extends PagingAndSortingRepository<Document, Long> {
 
 
 }

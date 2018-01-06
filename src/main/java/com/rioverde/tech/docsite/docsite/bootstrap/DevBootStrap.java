@@ -72,6 +72,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         log.debug("Creating a Dekalb County GA document");
         Document dekalbGaDocument = new Document();
         dekalbGaDocument.setAuthority(dekalbGa.get());
+        dekalbGaDocument.setTitle("This is a TEst document 1");
         dekalbGaDocument.setDocument(documentBytes);
         dekalbGaDocument.setCreatedBy(adminUser.get());
         dekalbGaDocument.setUpdatedBy(adminUser.get());
@@ -80,6 +81,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         log.debug("Creating a New Orleans LA document");
         Document nolaDocument = new Document();
         nolaDocument.setAuthority(nola.get());
+        nolaDocument.setTitle("This is another test document");
         nolaDocument.setDocument(documentBytes);
         nolaDocument.setCreatedBy(adminUser2.get());
         nolaDocument.setUpdatedBy(adminUser2.get());

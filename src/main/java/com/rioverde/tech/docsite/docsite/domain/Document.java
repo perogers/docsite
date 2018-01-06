@@ -15,6 +15,12 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
+    private int versionMajor;
+
+    private int versionMinor;
+
     @ManyToOne
     private Authority authority;
 
