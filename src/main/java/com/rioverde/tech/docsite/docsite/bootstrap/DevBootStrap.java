@@ -1,7 +1,7 @@
 package com.rioverde.tech.docsite.docsite.bootstrap;
 
 import com.rioverde.tech.docsite.docsite.domain.*;
-import com.rioverde.tech.docsite.docsite.repositories.AuthorityRepository;
+import com.rioverde.tech.docsite.docsite.repositories.AuthorityPagingRepository;
 import com.rioverde.tech.docsite.docsite.repositories.DocumentRepository;
 import com.rioverde.tech.docsite.docsite.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +11,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -25,11 +23,11 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Value("classpath:/static/gre_research_validity_data.pdf")
     private Resource documentResource;
-    private AuthorityRepository authorityRepository;
+    private AuthorityPagingRepository authorityRepository;
     private DocumentRepository documentRepository;
     private UserRepository userRepository;
 
-    public DevBootStrap(AuthorityRepository authorityRepository,
+    public DevBootStrap(AuthorityPagingRepository authorityRepository,
                         DocumentRepository documentRepository,
                         UserRepository userRepository) {
         this.authorityRepository = authorityRepository;
