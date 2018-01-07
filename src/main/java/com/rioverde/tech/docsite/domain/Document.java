@@ -17,6 +17,8 @@ public class Document {
 
     private String title;
 
+    private String summary;
+
     private int versionMajor;
 
     private int versionMinor;

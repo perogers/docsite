@@ -1,6 +1,7 @@
 package com.rioverde.tech.docsite.services;
 
 import com.rioverde.tech.docsite.domain.Document;
+import com.rioverde.tech.docsite.exceptions.NotFoundException;
 import com.rioverde.tech.docsite.repositories.DocumentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,23 @@ public class DocumentServiceImpl implements DocumentService {
 
         if(documentIterable == null ) {
             log.error("Failure returning documents from repository");
-            return documents;
+            throw new NotFoundException("No documents found");
         }
 
         documentIterable.forEach(documents::add);
         log.debug("Got document qty: " + documents.size());
 
         return documents;
+    }
+
+    @Override
+    public Document findById(Long id) {
+        log.debug("Find by ID: " + id);
+        Document document = documentRepository.findOne(id);
+        if(document == null) {
+            log.error("Document not found for ID: " + id);
+            throw new NotFoundException("Document not found for ID: " + id);
+        }
+        return document;
     }
 }

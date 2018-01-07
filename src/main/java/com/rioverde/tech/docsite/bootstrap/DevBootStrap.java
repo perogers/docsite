@@ -78,6 +78,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         dekalbGaDocument.setAuthority(dekalbGa.get());
         dekalbGaDocument.setTitle("This is a TEst document 1");
         dekalbGaDocument.setDocument(documentBytes);
+        dekalbGaDocument.setSummary("Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.");
         dekalbGaDocument.setCreatedBy(adminUser.get());
         dekalbGaDocument.setUpdatedBy(adminUser.get());
         documentRepository.save(dekalbGaDocument);
@@ -87,6 +88,7 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         nolaDocument.setAuthority(nola.get());
         nolaDocument.setTitle("This is another test document");
         nolaDocument.setDocument(documentBytes);
+        nolaDocument.setSummary("consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.");
         nolaDocument.setCreatedBy(adminUser2.get());
         nolaDocument.setUpdatedBy(adminUser2.get());
         documentRepository.save(nolaDocument);

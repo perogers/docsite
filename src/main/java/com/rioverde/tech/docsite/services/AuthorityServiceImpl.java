@@ -1,6 +1,7 @@
 package com.rioverde.tech.docsite.services;
 
 import com.rioverde.tech.docsite.domain.Authority;
+import com.rioverde.tech.docsite.exceptions.NotFoundException;
 import com.rioverde.tech.docsite.repositories.AuthorityPagingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
@@ -34,6 +35,11 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public Authority findById(Long id) {
-        return authorityRepository.findOne(id);
+        Authority authority = authorityRepository.findOne(id);
+        if( authority == null) {
+            log.error("No authority for ID: " + id);
+            throw new NotFoundException("No authority for ID: " + id);
+        }
+        return authority;
     }
 }

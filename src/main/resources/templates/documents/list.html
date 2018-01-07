@@ -68,9 +68,9 @@
                                 <td th:text="${document.title}">Test document 4</td>
                                 <td th:text="${document.authority.county}">Knox</td>
                                 <td th:text="${document.authority.state}">TN</td>
-                                <td><a href="#" th:href="@{'/document/' +  ${document.id} + '/show'}">View</a></td>
-                                <td><a href="#" th:href="@{'/document/' +  ${document.id} + '/update'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/document/' +  ${document.id} + '/delete'}">Delete</a></td>
+                                <td><a href="#" th:href="@{'/documents/' +  ${document.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/documents/' +  ${document.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/documents/' +  ${document.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>

@@ -53,4 +53,22 @@ public class DocumentControllerTest {
                 .andExpect(model().attributeExists("documents"));
 
     }
+
+    @Test
+    public void getDocumentTest() throws Exception {
+        // Given
+        Long id = new Long(2L);
+        Document document = new Document();
+        document.setId(id);
+
+        // When
+        when(service.findById(id)).thenReturn(document);
+
+        // Then
+        mockMvc.perform(get("/documents/2/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("documents/show"))
+                .andExpect(model().attributeExists("document"));
+
+    }
 }
