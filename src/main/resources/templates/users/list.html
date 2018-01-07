@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Authorities List</title>
+    <title>User List</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,12 +17,12 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<!--/*@thymesVar id="authority" type="com.rioverde.tech.docsite.domain.Authority"*/-->
+<!--/*@thymesVar id="authority" type="com.rioverde.tech.docsite.domain.User"*/-->
 <div class="container-fluid" style="margin-top: 10px; margin-left: 50px">
     <ul class="nav nav-tabs">
         <li role="presentation"><a href="/documents">Documents</a></li>
-        <li role="presentation" class="active"><a href="/authority">Authorities</a></li>
-        <li role="presentation"><a href="/users">Users</a></li>
+        <li role="presentation"><a href="/authority">Authorities</a></li>
+        <li role="presentation" class="active"><a href="/users">Users</a></li>
     </ul>
 </div>
 <div class="container-fluid" style="margin-top: 20px">
@@ -33,7 +33,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-8">
-                            <h1 class="panel-title">Authorities</h1>
+                            <h1 class="panel-title">Users</h1>
                         </div>
                         <div class="col-md-4">
                             <a class="btn btn-default" href="#" role="button">Add New</a>
@@ -42,44 +42,50 @@
 
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(authorities)}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(users)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
                                 <th>ID</th>
-                                <th>City</th>
-                                <th>County</th>
-                                <th>State</th>
-
-
+                                <th>User ID</th>
+                                <th>First</th>
+                                <th>Last</th>
+                                <th>Type</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
                                 <td>123</td>
-                                <td>Atlanta</td>
-                                <td>Fulton</td>
-                                <td>GA</td>
+                                <td>XXXX12</td>
+                                <td>Joe</td>
+                                <td>Blow</td>
+                                <td>ADMIN</td>
+                                <td>ACTIVE</td>
                                 <td><a href="#">View</a></td>
                                 <td><a href="#">Update</a></td>
                                 <td><a href="#">Delete</a></td>
                             </tr>
                             <tr th:remove="all">
-                                <td>453</td>
-                                <td>Doraville</td>
-                                <td>Dekalb</td>
-                                <td>GA</td>
+                                <td>124</td>
+                                <td>AAXX12</td>
+                                <td>Betty</td>
+                                <td>Lu</td>
+                                <td>CUSTOMER</td>
+                                <td>ACTIVE</td>
                                 <td><a href="#">View</a></td>
                                 <td><a href="#">Update</a></td>
                                 <td><a href="#">Delete</a></td>
                             </tr>
-                            <tr th:each="authority : ${authorities}">
-                                <td th:text="${authority.id}">334</td>
-                                <td th:text="${authority.city}">Knoxville</td>
-                                <td th:text="${authority.county}">Knox</td>
-                                <td th:text="${authority.state}">TN</td>
-                                <td><a href="#" th:href="@{'/authority/' +  ${authority.id} + '/show'}">View</a></td>
-                                <td><a href="#" th:href="@{'/authority/' +  ${authority.id} + '/update'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/authority/' +  ${authority.id} + '/delete'}">Delete</a></td>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.id}">21212</td>
+                                <td th:text="${user.userId}">hello</td>
+                                <td th:text="${user.firstName}">Bob</td>
+                                <td th:text="${user.lastName}">Roberts</td>
+                                <td th:text="${user.userType}">CUSTOMER</td>
+                                <td th:text="${user.userStatus}">SUSPENDED</td>
+                                <td><a href="#" th:href="@{'/users/' +  ${user.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/users/' +  ${user.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/users/' +  ${user.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>

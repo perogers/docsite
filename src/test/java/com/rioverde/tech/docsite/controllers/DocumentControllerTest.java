@@ -1,6 +1,7 @@
 package com.rioverde.tech.docsite.controllers;
 
 import com.rioverde.tech.docsite.domain.Document;
+import com.rioverde.tech.docsite.exceptions.NotFoundException;
 import com.rioverde.tech.docsite.services.DocumentService;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -70,5 +73,32 @@ public class DocumentControllerTest {
                 .andExpect(view().name("documents/show"))
                 .andExpect(model().attributeExists("document"));
 
+    }
+
+    @Test
+    public void getDocumentsIdNotFoundTest() throws Exception {
+
+        // When
+        when(service.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        // Then
+        mockMvc.perform(get("/documents/9999/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"))
+                .andExpect(model().attributeExists("exception"));
+    }
+
+
+    @Test
+    public void getDocumentsInvalidFormatIdTest() throws Exception {
+
+        // When
+        when(service.findById(anyLong())).thenReturn(new Document());
+
+        // Then
+        mockMvc.perform(get("/documents/XXXXX/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"))
+                .andExpect(model().attributeExists("exception"));
     }
 }
