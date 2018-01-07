@@ -6,7 +6,7 @@ import com.rioverde.tech.docsite.repositories.DocumentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Slf4j
@@ -23,7 +23,7 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Set<Document> getDocuments() {
         Iterable<Document> documentIterable = documentRepository.findAll();
-        Set<Document> documents = new HashSet<>();
+        Set<Document> documents = new LinkedHashSet<>();
 
         if(documentIterable == null ) {
             log.error("Failure returning documents from repository");

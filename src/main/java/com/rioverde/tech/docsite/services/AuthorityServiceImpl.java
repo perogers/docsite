@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Slf4j
@@ -22,7 +22,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public Set<Authority> getAuthorities() {
-        Set<Authority> authorities = new HashSet<>();
+        Set<Authority> authorities = new LinkedHashSet<>();
         Iterable<Authority> authorityIterable = authorityRepository.findAll(new Sort(Sort.DEFAULT_DIRECTION, "state", "county", "city")) ;
         if( authorityIterable == null ) {
             log.error("No authorities found");

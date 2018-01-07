@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Slf4j
@@ -23,14 +23,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public Set<User> getAll() {
         log.debug("Get all users");
-        Iterable<User> users = repository.findAll(new Sort(Sort.Direction.ASC, "lastName", "firstName"));
+        Iterable<User> users = repository.findAll(new Sort(Sort.Direction.ASC, "lastName", "firstName", "userType", "userStatus"));
 
         if( users == null) {
             log.error("Error for all users");
             throw new NotFoundException("Error getting all users");
         }
 
-        Set<User> userSet = new HashSet<>();
+        Set<User> userSet = new LinkedHashSet<>();
         users.forEach(userSet::add);
 
         return userSet;
