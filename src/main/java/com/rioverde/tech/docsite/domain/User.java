@@ -1,12 +1,17 @@
 package com.rioverde.tech.docsite.domain;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
-@Data
+@EqualsAndHashCode(exclude={"documents"})
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -24,6 +29,9 @@ public class User {
     private String lastName;
 
     // TODO address and contact information
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Document> documents;
 
     @Enumerated(EnumType.STRING)
     private UserType userType;

@@ -70,4 +70,19 @@ public class DocumentController {
 
         return modelAndView;
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleException(Exception exception){
+
+        log.error("Handling Exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("500error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
 }

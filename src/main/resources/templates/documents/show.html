@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Show Recipe</title>
+    <title>Document Information</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -15,6 +15,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet"  type="text/css" href="/css/styles.css"/>
+
 </head>
 <body>
 <!--/*@thymesVar id="document" type="com.rioverde.tech.docsite.domain.Document"*/-->
@@ -32,7 +35,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <h1 class="panel-title" th:text="${document.title}">Document TItle Here</h1>
                             </div>
                         </div>
@@ -59,7 +62,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <!-- p th:text="@{${document.createdBy.firstName} + ' ' + ${document.createdBy.lastName}">Sally Smith</p -->
+                                        <p th:text="@{${document.createdBy.firstName} + ' ' + ${document.createdBy.lastName}}">Sally Smith</p>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +74,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <!-- p th:text="@{${document.createdBy.firstName} + ' ' + ${document.createdBy.lastName}">Sally Smith</p -->
+                                        <p th:text="@{${document.updatedBy.firstName} + ' ' + ${document.updatedBy.lastName}}">Sally Smith</p>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +86,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <p th:text="${document.createdDateTime}">10-12-1999</p>
+                                        <p th:text="${#dates.format(document.createdDateTime, 'dd-MM-yyyy')}">12-10-2014</p>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +98,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <p th:text="${document.updatedDateTime}">01-20-2015</p>
+                                        <p th:text="${#dates.format(document.updatedDateTime, 'dd-MM-yyyy')}">09-17-2016</p>
                                     </div>
                                 </div>
                             </div>
