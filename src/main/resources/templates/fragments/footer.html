@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>404 Not Found Error</title>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
@@ -17,17 +14,6 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="margin-top: 25px">
-    <div class="container">
-        <img th:src="@{/img/oops.jpeg}" style="height: 100px; width: 100px" class="rounded float-left" alt="Oops!" />
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <h1>404 Not Found</h1>
-            <p th:text="${exception.getMessage()}">Exception Occurred</p>
-        </div>
-    </div>
-</div>
-<div th:replace="fragments/footer :: footer">&copy; 2xxxx</div>
+<div th:fragment="footer" style="margin-bottom: 50px; text-align:center;">&copy; 2017 Rio Verde Technologies - This site is for demonstration purposes only</div>
 </body>
 </html>
