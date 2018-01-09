@@ -26,9 +26,9 @@ public class AuthorityController {
     @RequestMapping({"/authority/{id}/show"})
     public String getAuthorityById(@PathVariable String id, Model model) {
         log.debug("Find by ID: " + id);
-        //model.addAttribute("authority", authorityService.findById(Long.valueOf(id)));
-        throw new RuntimeException("Not implemented");
-        //return "authority/show";
+        model.addAttribute("authority", authorityService.findById(Long.valueOf(id)));
+
+        return "authority/show";
     }
 
     @RequestMapping({"/authority"})
