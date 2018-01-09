@@ -5,6 +5,21 @@
     text-align:center;
 }
 
+#ds-panel-heading {
+    color: #9d9d9d;
+    background-color: #222;
+    border-color: #080808;
+}
+
+#ds-panel-primary {
+    border-color: #080808;
+}
+
+#ds-panel-primary a:link {color: #78828C;}
+#ds-panel-primary a:visited,#ds-panel-primary a:hover, #ds-panel-primary a:active {
+    color: #313C3D;
+}
+
 .panel-default > panel {
     color: #9d9d9d;
     background-color: #222;
