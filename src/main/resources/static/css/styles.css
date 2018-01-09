@@ -1,4 +1,21 @@
+@import url('//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css');
+
 #ds-footer {
     margin-bottom: 50px;
     text-align:center;
+}
+
+.panel-default > panel {
+    color: #9d9d9d;
+    background-color: #222;
+    border-color: #080808;
+}
+
+body {
+    padding-top: 60px;
+}
+@media (max-width: 979px) {
+    body {
+        padding-top: 0px;
+    }
 }
