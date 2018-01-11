@@ -1,6 +1,9 @@
 package com.rioverde.tech.docsite.controllers;
 
 import com.rioverde.tech.docsite.domain.Authority;
+import com.rioverde.tech.docsite.domain.Document;
+import com.rioverde.tech.docsite.domain.State;
+import com.rioverde.tech.docsite.exceptions.NotFoundException;
 import com.rioverde.tech.docsite.services.AuthorityService;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +13,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,7 +28,6 @@ public class AuthorityControllerTest {
     @Mock
     AuthorityService service;
 
-    @Mock
     AuthorityController controller;
 
     MockMvc mockMvc;
@@ -64,5 +69,30 @@ public class AuthorityControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("authority/list"))
                 .andExpect(model().attributeExists("authorities"));
+    }
+
+    @Test
+    public void getAuthorityByIdWrongIdTest() throws Exception {
+        // Given
+        when(service.findById(anyLong())).thenThrow(new NotFoundException("Bad ID"));
+
+        // Then
+        mockMvc.perform(get("/authority/2/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"))
+                .andExpect(model().attributeExists("exception"));
+    }
+
+
+    @Test
+    public void getAuthorityByIdBadIdTest() throws Exception {
+        // Given
+        when(service.findById(anyLong())).thenThrow(new NotFoundException("Bad ID"));
+
+        // Then
+        mockMvc.perform(get("/authority/zzzz/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"))
+                .andExpect(model().attributeExists("exception"));
     }
 }
