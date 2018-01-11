@@ -1,22 +1,24 @@
 package com.rioverde.tech.docsite.controllers;
 
+import com.rioverde.tech.docsite.commands.AuthorityCommand;
 import com.rioverde.tech.docsite.exceptions.NotFoundException;
 import com.rioverde.tech.docsite.services.AuthorityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.exceptions.TemplateInputException;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
 public class AuthorityController {
 
+    private static final String AUTHORITY_FORM_URL = "authority/authorityform";
     private final AuthorityService authorityService;
 
     public AuthorityController(AuthorityService authorityService) {
@@ -31,7 +33,16 @@ public class AuthorityController {
         return "authority/show";
     }
 
-    @RequestMapping({"/authority"})
+    @RequestMapping({"/authority/new"})
+    public String newAuthority( Model model) {
+        log.debug("Requesting authority form");
+        model.addAttribute("authority", new AuthorityCommand());
+
+        return AUTHORITY_FORM_URL;
+    }
+
+
+    @GetMapping({"/authority"})
     public String getAuthorities(Model model) {
         log.debug("Get all");
 
@@ -39,6 +50,25 @@ public class AuthorityController {
 
         return "authority/list";
     }
+
+    @PostMapping({"/authority"})
+    public String saveOrUpdateAuthority(@Valid @ModelAttribute("authority") AuthorityCommand command,
+                                        BindingResult bindingResult) {
+        log.debug("Adding / Updating authority");
+        if(bindingResult.hasErrors()) {
+
+            bindingResult.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
+            return AUTHORITY_FORM_URL;
+        }
+
+        AuthorityCommand savedCommand = authorityService.saveAuthorityCommand(command);
+
+        return "redirect:/authority/" + savedCommand.getId() + "/show";
+    }
+
 
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

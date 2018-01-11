@@ -1,5 +1,7 @@
 package com.rioverde.tech.docsite.services;
 
+import com.rioverde.tech.docsite.converters.AuthorityCommandToAuthority;
+import com.rioverde.tech.docsite.converters.AuthorityToAuthorityCommand;
 import com.rioverde.tech.docsite.domain.Authority;
 import com.rioverde.tech.docsite.domain.State;
 import com.rioverde.tech.docsite.repositories.AuthorityPagingRepository;
@@ -26,7 +28,9 @@ public class AuthorityServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        authorityService = new AuthorityServiceImpl(authorityRepository);
+        authorityService = new AuthorityServiceImpl(authorityRepository,
+                                                    new AuthorityCommandToAuthority(),
+                                                    new AuthorityToAuthorityCommand());
     }
 
     @Test

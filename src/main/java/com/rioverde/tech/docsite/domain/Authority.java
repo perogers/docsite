@@ -25,6 +25,10 @@ public class Authority {
 
     private String city;
 
+    private String url;
+
+    private String agency;
+
     @OneToMany(mappedBy = "authority")
     private Set<Document> documents = new HashSet<>();
 }
