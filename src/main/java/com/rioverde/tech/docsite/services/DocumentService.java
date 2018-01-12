@@ -9,4 +9,6 @@ public interface DocumentService {
     Set<Document> getDocuments();
 
     Document findById(Long id);
+
+    Set<Document> getDocumentsForAuthority(Long id);
 }

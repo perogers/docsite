@@ -31,4 +31,8 @@ public class Authority {
 
     @OneToMany(mappedBy = "authority")
     private Set<Document> documents = new HashSet<>();
+
+    public void addDocument(Document document) {
+        documents.add(document);
+    }
 }

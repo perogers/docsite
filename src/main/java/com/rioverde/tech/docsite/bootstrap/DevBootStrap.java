@@ -83,6 +83,15 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
         dekalbGaDocument.setUpdatedBy(adminUser.get());
         documentRepository.save(dekalbGaDocument);
 
+        Document dekalbGaDocument2 = new Document();
+        dekalbGaDocument2.setAuthority(dekalbGa.get());
+        dekalbGaDocument2.setTitle("This is a Test Document 2");
+        dekalbGaDocument2.setDocument(documentBytes);
+        dekalbGaDocument2.setSummary("consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.");
+        dekalbGaDocument2.setCreatedBy(adminUser.get());
+        dekalbGaDocument2.setUpdatedBy(adminUser.get());
+        documentRepository.save(dekalbGaDocument2);
+
         log.debug("Creating a New Orleans LA document");
         Document nolaDocument = new Document();
         nolaDocument.setAuthority(nola.get());

@@ -1,5 +1,6 @@
 package com.rioverde.tech.docsite.controllers;
 
+import com.rioverde.tech.docsite.domain.Authority;
 import com.rioverde.tech.docsite.domain.Document;
 import com.rioverde.tech.docsite.exceptions.NotFoundException;
 import com.rioverde.tech.docsite.services.DocumentService;
@@ -51,6 +52,33 @@ public class DocumentControllerTest {
 
         // Then
         mockMvc.perform(get("/documents"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("documents/list"))
+                .andExpect(model().attributeExists("documents"));
+
+    }
+
+    @Test
+    public void getAllDocumentsForAuthorityTest() throws Exception {
+
+        // Given
+        Long documentId = new Long(2L);
+        Long authorityId = new Long(3L);
+        Authority authority = new Authority();
+        authority.setId(authorityId);
+
+        Document document = new Document();
+        document.setId(documentId);
+        document.setAuthority(authority);
+        Set<Document> documents = new HashSet<>();
+        documents.add(document);
+        authority.addDocument(document);
+
+        // When
+        when(service.getDocumentsForAuthority(authorityId)).thenReturn(documents);
+
+        // Then
+        mockMvc.perform(get("/documents/authority/" + authorityId + "/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("documents/list"))
                 .andExpect(model().attributeExists("documents"));

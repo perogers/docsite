@@ -5,5 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface DocumentRepository extends PagingAndSortingRepository<Document, Long> {
 
-
+    Iterable<Document> findAllByAuthorityIdEquals(Long authorityId);
 }

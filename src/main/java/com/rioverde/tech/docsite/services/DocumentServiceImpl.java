@@ -37,6 +37,22 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
+    public Set<Document> getDocumentsForAuthority(Long id) {
+        Iterable<Document> documentIterable = documentRepository.findAllByAuthorityIdEquals(id);
+        Set<Document> documents = new LinkedHashSet<>();
+
+        if(documentIterable == null ) {
+            log.error("Failure returning documents from repository");
+            throw new NotFoundException("No documents found");
+        }
+
+        documentIterable.forEach(documents::add);
+        log.debug("Got document qty: " + documents.size());
+
+        return documents;
+    }
+
+    @Override
     public Document findById(Long id) {
         log.debug("Find by ID: " + id);
         Document document = documentRepository.findOne(id);

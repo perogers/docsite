@@ -56,7 +56,6 @@
                             <a class="btn btn-default" href="#" th:href="@{'/authority/new'}" role="button">Add New</a>
                         </div>
                     </div>
-
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(authorities)}">
@@ -64,10 +63,11 @@
                             <thead class="thead-inverse">
                             <tr>
                                 <th>ID</th>
-                                <th>Agency</th>
-                                <th>City</th>
-                                <th>County</th>
-                                <th>State</th>
+                                <th th:text="#{authority.agency}">Agency</th>
+                                <th th:text="#{authority.city}">City</th>
+                                <th th:text="#{authority.county}">County</th>
+                                <th th:text="#{authority.state}">State</th>
+                                <th th:text="#{authority.documents}">Documents</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -76,9 +76,10 @@
                                 <td>Atlanta</td>
                                 <td>Fulton</td>
                                 <td>GA</td>
+                                <td>20</td>
                                 <td><a href="#">View</a></td>
                                 <td><a href="#">Update</a></td>
-                                <td><a href="#">Delete</a></td>
+                                <td></td>
                             </tr>
                             <tr th:remove="all">
                                 <td>453</td>
@@ -86,6 +87,7 @@
                                 <td>Doraville</td>
                                 <td>Dekalb</td>
                                 <td>GA</td>
+                                <td>0</td>
                                 <td><a href="#">View</a></td>
                                 <td><a href="#">Update</a></td>
                                 <td><a href="#">Delete</a></td>
@@ -96,9 +98,16 @@
                                 <td th:text="${authority.city}">Knoxville</td>
                                 <td th:text="${authority.county}">Knox</td>
                                 <td th:text="${authority.state}">TN</td>
+                                <td>
+                                    <a th:text="@{${authority.documents.size()} + ' View'}" th:if="${authority.documents.size()} gt 0"
+                                       href="#" th:href="@{'/documents/authority/' +  ${authority.id} + '/list'}">9</a>
+                                </td>
                                 <td><a href="#" th:href="@{'/authority/' +  ${authority.id} + '/show'}">View</a></td>
                                 <td><a href="#" th:href="@{'/authority/' +  ${authority.id} + '/update'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/authority/' +  ${authority.id} + '/delete'}">Delete</a></td>
+                                <td >
+                                    <a th:unless="${authority.documents.size()} gt 0"
+                                       href="#" th:href="@{'/authority/' +  ${authority.id} + '/delete'}">Delete</a>
+                                </td>
                             </tr>
                         </table>
                     </div>
